@@ -1,8 +1,14 @@
 # -*- Coding: utf-8 -*-
 # Python 3
-# By: LawlietJH
-# IpMac
-# Versión: 1.1.2
+#
+#                ██╗██████╗ ███╗   ███╗ █████╗  ██████╗
+#                ██║██╔══██╗████╗ ████║██╔══██╗██╔════╝
+#                ██║██████╔╝██╔████╔██║███████║██║     
+#                ██║██╔═══╝ ██║╚██╔╝██║██╔══██║██║     
+#                ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
+#                ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+#                                                         By: LawlietJH
+#                                                               v1.1.3
 
 
 
@@ -10,9 +16,28 @@ import time
 import os
 
 
+Banner1 = """
+                     ██╗██████╗ ███╗   ███╗ █████╗  ██████╗
+                     ██║██╔══██╗████╗ ████║██╔══██╗██╔════╝
+                     ██║██████╔╝██╔████╔██║███████║██║     
+                     ██║██╔═══╝ ██║╚██╔╝██║██╔══██║██║     
+                     ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
+                     ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+"""
 
-Autor = "LawlietJH"
-Version = "v1.1.2"
+Banner2 = """
+                                  ╦┌─┐╔╦╗┌─┐┌─┐
+                                  ║├─┘║║║├─┤│  
+                                  ╩┴  ╩ ╩┴ ┴└─┘
+"""
+
+Autor = """
+                            ╦  ┌─┐┬ ┬┬  ┬┌─┐┌┬┐╦╦ ╦
+                            ║  ├─┤││││  │├┤  │ ║╠═╣
+                            ╩═╝┴ ┴└┴┘┴─┘┴└─┘ ┴╚╝╩ ╩
+"""
+
+Version = "v1.1.3"
 
 
 
@@ -25,6 +50,16 @@ VIPv6 = False
 #=======================================================================
 
 
+
+def Dat():
+	
+	os.system("cls && Title IpMac.py                "+\
+			"By: LawlietJH                "+Version+"    ")
+	print("\n\n", Banner1)
+	print("\n\n", Autor)
+	Ver = "\n{:^80}".format(Version)
+	print(Ver)
+	
 
 def Salir(Num=0):
 	
@@ -212,10 +247,5 @@ if __name__ == "__main__":
 		
 		Main()
 		
-		#~ Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
-		#~ Adaptador = Datos.pop("Conexión de área local* 1") # Sacamos Los Datos Del adaptador De Red Seleccionado.
-		#~ print(Adaptador)
-		#~ for xD in Adaptador:
-			#~ print(xD)
-		#~ os.system("Pause > Nul")
+		#~ Dat(), os.system("Pause")
 
