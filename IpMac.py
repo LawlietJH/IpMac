@@ -2,14 +2,14 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.0.4
+# Versión: 1.0.5
 
 
 
 import os
 
 Autor = "LawlietJH"
-Version = "v1.0.4"
+Version = "v1.0.5"
 
 
 
@@ -24,15 +24,16 @@ def Chk_Dep():	# Se Instalan las Dependencias.
 		
 	except ModuleNotFoundError:
 		print("\n\n\t[!] Instalando Dependencias...\n\n\t\t")
-		os.system("Title Instalando psutil && pip install psutil > Nul && cls && Title IpMac.py            By: LawlietJH")
+		os.system("Title Instalando psutil && pip install psutil > Nul"+\
+				  "&& cls && Title IpMac.py            By: LawlietJH")
 		
-	except Exception as ex:
-		print( type(ex).__name__ )		#Ver cuando ocurre un error y poder añadirlo a las ecepciones, y no cierre el programa.
+	except Exception as ex:				# Ver cuando ocurre un error y poder añadirlo
+		print( type(ex).__name__ )		# A las ecepciones, y no cierre el programa.
 
 
 
-Chk_Dep()			#~ Se instala el módulo psutil si esta no esta instalada.
-import psutil 		#~ Se importa la módulo.
+Chk_Dep()			# Se instala el módulo psutil si esta no esta instalada.
+import psutil 		# Se importa la módulo.
 
 
 
@@ -56,33 +57,49 @@ def getIPv4(Datos):	# Devuelve La IPv4
 
 
 
+def getAdaptadores():	# Se Obtiene Una Lista Con Todos Los Nombres de Adaptadores Disponibles.
+	
+	Info = psutil.net_if_addrs()
+	
+	Adaptadores = []
+	
+	for xD in Info:
+		
+		Adaptadores.append(xD)
+		
+	return Adaptadores
+
+
 #=======================================================================
 
 
-def Main():
+
+def Main():	# Función Principal.
 	
-	Lista = []
-	Datos = psutil.net_if_addrs()
+	Datos =  psutil.net_if_addrs()
+	Adaptadores = getAdaptadores()
 	cont = 0
 	
-	for x in Datos:
+	for xD in Adaptadores:
 		
 		cont += 1
-		print(" [*] ", cont, " - ", x)
-		Lista.append(x)
+		print(" [*] ", cont, " - ", xD)
 	
 	print("\n [*]  0 - Salir...")
 	
-	xD = input("\n\n\t Opciones de Busqueda: ")
-	
+	try:
+		xD = input("\n\n\t Opciones de Busqueda: ")
+	except:
+		print("\n\n\t [!] Opción No Válida.")
+		
 	if xD == "0": exit(1)
 	elif xD == "": exit(1)
 	else: xD = int(xD)
 	
-	Datos = Datos.pop(Lista[xD-1]) # Sacamos los datos de la red Elegida.
+	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos los datos de la red Elegida.
 	
-	MAC = getMAC(Datos)
-	IPv4 = getIPv4(Datos)
+	MAC = getMAC(Adaptador)
+	IPv4 = getIPv4(Adaptador)
 	
 	print("\n\n\n MAC:\t" + MAC)
 	print("\n IPv4:\t" + IPv4)
@@ -93,6 +110,8 @@ def Main():
 
 
 if __name__ == "__main__":
+	
+	os.system("cls && Title IpMac.py            By: LawlietJH")
 	
 	Main()
 	
