@@ -1,5 +1,30 @@
-import psutil
+# -*- Coding: utf-8 -*-
+# Python 3
+# By: LawlietJH
+# IpMac
+# Versión: 1.0.1
+
 import os
+
+Autor = "LawlietJH"
+Version = "v1.0.1"
+
+def Chk_Dep():
+	
+	try:
+		import psutil
+		
+	except ModuleNotFoundError:
+		print("\n\n\t[!] Instalando Dependencias...\n\n\t\t")
+		os.system("Title Instalando psutil && pip install psutil > Nul && cls && Title IpMac.py            By: LawlietJH")
+		
+	except Exception as ex:
+		print( type(ex).__name__ )		#Ver cuando ocurre un error y poder añadirlo a las ecepciones, y no cierre el programa.
+
+Chk_Dep()				#~ Se instala el módulo pytube si esta no esta instalada.
+import psutil 		#~ Se importa la módulo.
+
+
 
 Lista = []
 Datos = psutil.net_if_addrs()
