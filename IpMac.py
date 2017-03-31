@@ -1,16 +1,14 @@
 # -*- Coding: utf-8 -*-
 # Python 3
 #
-#                ██╗██████╗ ███╗   ███╗ █████╗  ██████╗
-#                ██║██╔══██╗████╗ ████║██╔══██╗██╔════╝
-#                ██║██████╔╝██╔████╔██║███████║██║     
-#                ██║██╔═══╝ ██║╚██╔╝██║██╔══██║██║     
-#                ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
-#                ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
+#                    ██╗██████╗ ███╗   ███╗ █████╗  ██████╗
+#                    ██║██╔══██╗████╗ ████║██╔══██╗██╔════╝
+#                    ██║██████╔╝██╔████╔██║███████║██║     
+#                    ██║██╔═══╝ ██║╚██╔╝██║██╔══██║██║     
+#                    ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
+#                    ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 #                                                         By: LawlietJH
-#                                                               v1.1.3
-
-
+#                                                               v1.1.4
 
 import time
 import os
@@ -37,7 +35,7 @@ Autor = """
                             ╩═╝┴ ┴└┴┘┴─┘┴└─┘ ┴╚╝╩ ╩
 """
 
-Version = "v1.1.3"
+Version = "v1.1.4"
 
 
 
@@ -51,17 +49,18 @@ VIPv6 = False
 
 
 
-def Dat():
+def Dat():	# Función Que Permite Mostrar Los Datos Del Script.
 	
 	os.system("cls && Title IpMac.py                "+\
 			"By: LawlietJH                "+Version+"    ")
 	print("\n\n", Banner1)
 	print("\n\n", Autor)
-	Ver = "\n{:^80}".format(Version)
-	print(Ver)
+	print("\n{:^80}".format(Version))
+	
+	os.system("Pause > Nul")
 	
 
-def Salir(Num=0):
+def Salir(Num=0):	# Fucnión Que Permite Salir Del Script Sin Error Alguno.
 	
 	try:
 		time.sleep(1.5)
@@ -95,18 +94,15 @@ import psutil 		# Se importa la módulo.
 
 
 
-def getMAC(Adaptador):	# Devuelve La Direción MAC.
+def getMAC(Adaptador):	# Devuelve La Direción MAC De Los Adaptadores De Red.
 	
-	if "AF_LINK" in str(Adaptador[0][0]):
-		print("LINK 0,0")
-	
-	MAC = str(Adaptador[0][1])
+	if "AF_LINK" in str(Adaptador[0][0]): MAC = str(Adaptador[0][1])
 	
 	return MAC
 
 
 
-def getIP(Adaptador):	# Devuelve La IP
+def getIP(Adaptador):	# Devuelve La IP Ya Sea Versión 4 y/o 6.
 	
 	global VIPv4
 	global VIPv6
@@ -136,7 +132,7 @@ def getIP(Adaptador):	# Devuelve La IP
 	return(IPv4, IPv6)
 
 
-def getDatos():
+def getDatos():	# Devuelve Todos Los Datos Sobre Todos Los Adaptadores De Red Disponibles.
 	
 	Datos =  psutil.net_if_addrs()
 	
@@ -156,7 +152,7 @@ def getAdaptadores():	# Se Obtiene Una Lista Con Todos Los Nombres de Adaptadore
 
 
 
-def ImprimeLista(Adaptadores):
+def ImprimeLista(Adaptadores):	#Imprime Los Nombres De Los Adaptadores De red Disponibles.
 	
 	global cont
 	cont = 1
@@ -243,9 +239,8 @@ if __name__ == "__main__":
 	
 	while True: 
 		
-		os.system("cls && Title IpMac.py                 By: LawlietJH")
+		os.system("cls && Title IpMac.py                "+\
+			"By: LawlietJH                "+Version+"    ")
 		
 		Main()
-		
-		#~ Dat(), os.system("Pause")
 
