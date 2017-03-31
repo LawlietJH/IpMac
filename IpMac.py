@@ -2,7 +2,7 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.1.0
+# Versión: 1.1.1
 
 
 
@@ -12,7 +12,7 @@ import os
 
 
 Autor = "LawlietJH"
-Version = "v1.1.0"
+Version = "v1.1.1"
 
 
 
@@ -190,7 +190,14 @@ def Main():	# Función Principal.
 	IPv4, IPv6 = getIP(Adaptador)		# Obtenemos La IP Del Adaptador Seleccionado.
 	
 	print("\n\n\n\t\t [*] MAC:\t" + MAC)
-	if VIPv4 == True: print("\n\t\t [*] IPv4:\t" + IPv4 + "\n\n\n")
+	
+	if len(Adaptador) == 4:
+		print("\n\t\t [*] IPv4 (1):\t" + IPv4 + "\n\n\n")
+		print("\n\t\t [*] IPv4 (2):\t" + Adaptador[2][1] + "\n\n\n")
+		print("\n\t\t [*] IPv6:\t" + Adaptador[3][1] + "\n\n\n")
+	
+	elif VIPv4 == True: print("\n\t\t [*] IPv4:\t" + IPv4 + "\n\n\n")
+	
 	if VIPv6 == True: print("\n\t\t [*] IPv6:\t" + IPv6 + "\n\n\n")
 	
 	os.system("Pause > Nul")
@@ -209,4 +216,10 @@ if __name__ == "__main__":
 		
 		Main()
 		
+		#~ Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
+		#~ Adaptador = Datos.pop("Conexión de área local* 1") # Sacamos Los Datos Del adaptador De Red Seleccionado.
+		#~ print(Adaptador)
+		#~ for xD in Adaptador:
+			#~ print(xD)
+		#~ os.system("Pause > Nul")
 
