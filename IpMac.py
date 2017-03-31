@@ -2,12 +2,12 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.0.2
+# Versión: 1.0.3
 
 import os
 
 Autor = "LawlietJH"
-Version = "v1.0.2"
+Version = "v1.0.3"
 
 def Chk_Dep():
 	
@@ -31,6 +31,12 @@ def getMAC(Datos):
 	
 	return MAC
 
+def getIPv4(Datos):
+	
+	IPv4 = str(Datos[1][1])
+	
+	return IPv4
+
 Lista = []
 Datos = psutil.net_if_addrs()
 cont = 0
@@ -46,9 +52,10 @@ xD = int(input("\n\n\t Opciones de Busqueda: "))
 Datos = Datos.pop(Lista[xD-1]) # Sacamos los datos de la red Elegida.
 
 MAC = getMAC(Datos)
+IPv4 = getIPv4(Datos)
 
 print("\n\n\n MAC:\t" + MAC)
-print("\n IPv4:\t" + str(Datos[1][1]))
+print("\n IPv4:\t" + IPv4)
 
 os.system("Pause > Nul")
 
