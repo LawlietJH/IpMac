@@ -2,14 +2,14 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.0.6
+# Versión: 1.0.7
 
 
 
 import os
 
 Autor = "LawlietJH"
-Version = "v1.0.6"
+Version = "v1.0.7"
 
 
 
@@ -25,7 +25,7 @@ def Chk_Dep():	# Se Instalan las Dependencias.
 	except ModuleNotFoundError:
 		print("\n\n\t[!] Instalando Dependencias...\n\n\t\t")
 		os.system("Title Instalando psutil && pip install psutil > Nul"+\
-				  "&& cls && Title IpMac.py            By: LawlietJH")
+				 "&& cls && Title IpMac.py                 By: LawlietJH")
 		
 	except Exception as ex:				# Ver cuando ocurre un error y poder añadirlo
 		print( type(ex).__name__ )		# A las ecepciones, y no cierre el programa.
@@ -71,11 +71,30 @@ def getAdaptadores():	# Se Obtiene Una Lista Con Todos Los Nombres de Adaptadore
 	
 	Adaptadores = []
 	
-	for xD in Info:
-		
-		Adaptadores.append(xD)
+	for xD in Info:	Adaptadores.append(xD)
 		
 	return Adaptadores
+
+
+
+def ImprimeLista(Adaptadores):
+	
+	cont = 1
+	
+	print("\n\n\n")
+	
+	for xD in Adaptadores:	print("    [*] ", cont, " - ", xD), cont += 1
+	
+	print("\n    [*]  0 - Salir...")
+	
+	try:			xD = input("\n\n\t [+] Elige Una Opción: ")
+	except:			print("\n\n\t [!] Opción No Válida.")
+		
+	if xD == "0":	exit(1)
+	elif xD == "":	return xD
+	else:
+		try:		return int(xD)
+		except:		xD = False,	return xD
 
 
 
@@ -85,31 +104,18 @@ def getAdaptadores():	# Se Obtiene Una Lista Con Todos Los Nombres de Adaptadore
 
 def Main():	# Función Principal.
 	
-	Datos =  getDatos()
-	Adaptadores = getAdaptadores()
+	Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
+	Adaptadores = getAdaptadores()	# Obtenemos Todos Los Nombres De Los Adaptadores Disponibles.
 	
-	cont = 0
+	xD = ImprimeLista(Adaptadores)	# Imprime La Lista Con Los Nombres De Los Adaptadores.
 	
-	for xD in Adaptadores:
+	if xD == "": print("\n\n\t [!] Elige Una Opción!"), os.system("Pause > Nul"), return
+	elif xD == False: print("\n\n\t [!] Caracter No Válido!"), os.system("Pause > Nul"), return
 		
-		cont += 1
-		print(" [*] ", cont, " - ", xD)
+	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos Los Datos Del adaptador De Red Seleccionado.
 	
-	print("\n [*]  0 - Salir...")
-	
-	try:
-		xD = input("\n\n\t Opciones de Busqueda: ")
-	except:
-		print("\n\n\t [!] Opción No Válida.")
-		
-	if xD == "0": exit(1)
-	elif xD == "": return
-	else: xD = int(xD)
-	
-	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos los datos de la red Elegida.
-	
-	MAC = getMAC(Adaptador)
-	IPv4 = getIPv4(Adaptador)
+	MAC = getMAC(Adaptador)			# Obtenemos La MAC Del Adaptador Seleccionado.
+	IPv4 = getIPv4(Adaptador)		# Obtenemos La IPv4 Del Adaptador Seleccionado.
 	
 	print("\n\n\n MAC:\t" + MAC)
 	print("\n IPv4:\t" + IPv4 + "\n\n\n")
@@ -121,11 +127,12 @@ def Main():	# Función Principal.
 #=======================================================================
 
 
+
 if __name__ == "__main__":
 	
 	while True: 
 		
-		os.system("cls && Title IpMac.py            By: LawlietJH")
+		os.system("cls && Title IpMac.py                 By: LawlietJH")
 		
 		Main()
 
