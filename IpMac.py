@@ -2,14 +2,14 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.0.5
+# Versión: 1.0.6
 
 
 
 import os
 
 Autor = "LawlietJH"
-Version = "v1.0.5"
+Version = "v1.0.6"
 
 
 
@@ -57,6 +57,14 @@ def getIPv4(Datos):	# Devuelve La IPv4
 
 
 
+def getDatos():
+	
+	Datos =  psutil.net_if_addrs()
+	
+	return Datos
+
+
+
 def getAdaptadores():	# Se Obtiene Una Lista Con Todos Los Nombres de Adaptadores Disponibles.
 	
 	Info = psutil.net_if_addrs()
@@ -70,14 +78,16 @@ def getAdaptadores():	# Se Obtiene Una Lista Con Todos Los Nombres de Adaptadore
 	return Adaptadores
 
 
+
 #=======================================================================
 
 
 
 def Main():	# Función Principal.
 	
-	Datos =  psutil.net_if_addrs()
+	Datos =  getDatos()
 	Adaptadores = getAdaptadores()
+	
 	cont = 0
 	
 	for xD in Adaptadores:
@@ -93,7 +103,7 @@ def Main():	# Función Principal.
 		print("\n\n\t [!] Opción No Válida.")
 		
 	if xD == "0": exit(1)
-	elif xD == "": exit(1)
+	elif xD == "": return
 	else: xD = int(xD)
 	
 	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos los datos de la red Elegida.
@@ -102,7 +112,9 @@ def Main():	# Función Principal.
 	IPv4 = getIPv4(Adaptador)
 	
 	print("\n\n\n MAC:\t" + MAC)
-	print("\n IPv4:\t" + IPv4)
+	print("\n IPv4:\t" + IPv4 + "\n\n\n")
+	
+	os.system("Pause > Nul")
 
 
 
@@ -111,8 +123,10 @@ def Main():	# Función Principal.
 
 if __name__ == "__main__":
 	
-	os.system("cls && Title IpMac.py            By: LawlietJH")
-	
-	Main()
-	
-	os.system("Pause > Nul")
+	while True: 
+		
+		os.system("cls && Title IpMac.py            By: LawlietJH")
+		
+		Main()
+
+
