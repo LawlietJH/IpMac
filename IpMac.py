@@ -2,7 +2,7 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.0.9
+# Versión: 1.1.0
 
 
 
@@ -12,7 +12,13 @@ import os
 
 
 Autor = "LawlietJH"
-Version = "v1.0.9"
+Version = "v1.1.0"
+
+
+
+cont = 0
+VIPv4 = False
+VIPv6 = False
 
 
 
@@ -54,20 +60,49 @@ import psutil 		# Se importa la módulo.
 
 
 
-def getMAC(Datos):	# Devuelve La Direción MAC.
+def getMAC(Adaptador):	# Devuelve La Direción MAC.
 	
-	MAC = str(Datos[0][1])
+	if "AF_LINK" in str(Adaptador[0][0]):
+		print("LINK 0,0")
+	
+	MAC = str(Adaptador[0][1])
 	
 	return MAC
 
 
 
-def getIPv4(Datos):	# Devuelve La IPv4
+def getIP(Adaptador):	# Devuelve La IP
 	
-	IPv4 = str(Datos[1][1])
+	global VIPv4
+	global VIPv6
+	VIPv4 = False
+	VIPv6 = False
+	IPv4 = " "
+	IPv6 = " "
 	
-	return IPv4
-
+	
+	try:
+		if "AF_INET6" in str(Adaptador[1][0]):
+			print("INET6 0,1")
+			VIPv6 = True
+			IPv6 = str(Adaptador[1][1])
+			return (IPv4, IPv6)
+			
+		elif "AF_INET" in str(Adaptador[1][0]):
+			print("INET 0,1")
+			VIPv4 = True
+			IPv4 = str(Adaptador[1][1])
+		
+		if "AF_INET6" in str(Adaptador[2][0]):
+			print("INET6 0,2")
+			VIPv6 = True
+			IPv6 = str(Adaptador[2][1])
+			return (IPv4, IPv6)
+			
+	except:
+		print("Error")
+	
+	return(IPv4, IPv6)
 
 
 def getDatos():
@@ -128,6 +163,8 @@ def ImprimeLista(Adaptadores):
 
 def Main():	# Función Principal.
 	
+	global VIPv4
+	global VIPv6
 	global cont
 	
 	Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
@@ -149,21 +186,14 @@ def Main():	# Función Principal.
 		
 	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos Los Datos Del adaptador De Red Seleccionado.
 	
-	MAC = getMAC(Adaptador)			# Obtenemos La MAC Del Adaptador Seleccionado.
-	IPv4 = getIPv4(Adaptador)		# Obtenemos La IPv4 Del Adaptador Seleccionado.
+	MAC = getMAC(Adaptador)		# Obtenemos La MAC Del Adaptador Seleccionado.
+	IPv4, IPv6 = getIP(Adaptador)		# Obtenemos La IP Del Adaptador Seleccionado.
 	
 	print("\n\n\n\t\t [*] MAC:\t" + MAC)
-	print("\n\t\t [*] IPv4:\t" + IPv4 + "\n\n\n")
+	if VIPv4 == True: print("\n\t\t [*] IPv4:\t" + IPv4 + "\n\n\n")
+	if VIPv6 == True: print("\n\t\t [*] IPv6:\t" + IPv6 + "\n\n\n")
 	
 	os.system("Pause > Nul")
-
-
-
-#=======================================================================
-
-
-
-cont = 0
 
 
 
@@ -178,5 +208,5 @@ if __name__ == "__main__":
 		os.system("cls && Title IpMac.py                 By: LawlietJH")
 		
 		Main()
-
+		
 
