@@ -2,7 +2,7 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.1.1
+# Versión: 1.1.2
 
 
 
@@ -12,7 +12,7 @@ import os
 
 
 Autor = "LawlietJH"
-Version = "v1.1.1"
+Version = "v1.1.2"
 
 
 
@@ -83,22 +83,18 @@ def getIP(Adaptador):	# Devuelve La IP
 	
 	try:
 		if "AF_INET6" in str(Adaptador[1][0]):
-			print("INET6 0,1")
 			VIPv6 = True
 			IPv6 = str(Adaptador[1][1])
 			return (IPv4, IPv6)
 			
 		elif "AF_INET" in str(Adaptador[1][0]):
-			print("INET 0,1")
 			VIPv4 = True
 			IPv4 = str(Adaptador[1][1])
 		
 		if "AF_INET6" in str(Adaptador[2][0]):
-			print("INET6 0,2")
 			VIPv6 = True
 			IPv6 = str(Adaptador[2][1])
 			return (IPv4, IPv6)
-			
 	except:
 		print("Error")
 	
@@ -175,30 +171,30 @@ def Main():	# Función Principal.
 	if xD == "":
 		print("\n\n\t\t [!] Elige Una Opción!"), time.sleep(1.5)
 		return
-		
-	elif xD > cont:
+	elif xD >= cont:
 		print("\n\n\t\t [!] Opción No Inexistente!"), time.sleep(1.5)
 		return
-		
 	elif xD == False:
 		print("\n\n\t\t [!] Caracteres No Válido!"), time.sleep(1.5)
 		return
 		
 	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos Los Datos Del adaptador De Red Seleccionado.
 	
-	MAC = getMAC(Adaptador)		# Obtenemos La MAC Del Adaptador Seleccionado.
-	IPv4, IPv6 = getIP(Adaptador)		# Obtenemos La IP Del Adaptador Seleccionado.
+	MAC = getMAC(Adaptador)			# Obtenemos La MAC Del Adaptador Seleccionado.
+	IPv4, IPv6 = getIP(Adaptador)	# Obtenemos La IP Del Adaptador Seleccionado.
 	
-	print("\n\n\n\t\t [*] MAC:\t" + MAC)
+	print("\n\n\n\t\t [*] MAC:\t" + MAC)		# Imprime La Dirección MAC.
 	
-	if len(Adaptador) == 4:
-		print("\n\t\t [*] IPv4 (1):\t" + IPv4 + "\n\n\n")
-		print("\n\t\t [*] IPv4 (2):\t" + Adaptador[2][1] + "\n\n\n")
-		print("\n\t\t [*] IPv6:\t" + Adaptador[3][1] + "\n\n\n")
+	if len(Adaptador) == 4:						# Si Hay Más de Una IPv4.
+		print("\n\t\t [*] IPv4 (1):\t" + IPv4)
+		print("\n\t\t [*] IPv4 (2):\t" + Adaptador[2][1])
+		print("\n\t\t [*] IPv6:\t" + Adaptador[3][1])
 	
-	elif VIPv4 == True: print("\n\t\t [*] IPv4:\t" + IPv4 + "\n\n\n")
+	elif VIPv4 == True: print("\n\t\t [*] IPv4:\t" + IPv4)	# Imprime Si Hay IPv4.
 	
-	if VIPv6 == True: print("\n\t\t [*] IPv6:\t" + IPv6 + "\n\n\n")
+	if VIPv6 == True: print("\n\t\t [*] IPv6:\t" + IPv6)	# Imprime Si Hay IPv6.
+	
+	print("\n\n\n")
 	
 	os.system("Pause > Nul")
 
