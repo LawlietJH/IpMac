@@ -83,7 +83,9 @@ def ImprimeLista(Adaptadores):
 	
 	print("\n\n\n")
 	
-	for xD in Adaptadores:	print("    [*] ", cont, " - ", xD), cont += 1
+	for xD in Adaptadores:
+		print("    [*] ", cont, " - ", xD)
+		cont += 1
 	
 	print("\n    [*]  0 - Salir...")
 	
@@ -93,8 +95,11 @@ def ImprimeLista(Adaptadores):
 	if xD == "0":	exit(1)
 	elif xD == "":	return xD
 	else:
-		try:		return int(xD)
-		except:		xD = False,	return xD
+		try:
+			return int(xD)
+		except:
+			xD = False
+			return xD
 
 
 
@@ -109,8 +114,12 @@ def Main():	# Función Principal.
 	
 	xD = ImprimeLista(Adaptadores)	# Imprime La Lista Con Los Nombres De Los Adaptadores.
 	
-	if xD == "": print("\n\n\t [!] Elige Una Opción!"), os.system("Pause > Nul"), return
-	elif xD == False: print("\n\n\t [!] Caracter No Válido!"), os.system("Pause > Nul"), return
+	if xD == "":
+		print("\n\n\t [!] Elige Una Opción!"), os.system("Pause > Nul")
+		return
+	elif xD == False:
+		print("\n\n\t [!] Caracter No Válido!"), os.system("Pause > Nul")
+		return
 		
 	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos Los Datos Del adaptador De Red Seleccionado.
 	
