@@ -14,6 +14,9 @@ import time
 import os
 
 
+# Banners: http://patorjk.com/software/taag/
+
+
 Banner1 = """
                      ██╗██████╗ ███╗   ███╗ █████╗  ██████╗
                      ██║██╔══██╗████╗ ████║██╔══██╗██╔════╝
@@ -22,18 +25,22 @@ Banner1 = """
                      ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
                      ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 """
+# Fuente: ANSI Shadow - http://patorjk.com/software/taag/#p=display&f=ANSI%20Shadow&t=IpMac
+
 
 Banner2 = """
                                   ╦┌─┐╔╦╗┌─┐┌─┐
                                   ║├─┘║║║├─┤│  
                                   ╩┴  ╩ ╩┴ ┴└─┘
 """
+# Fuente: Calvin S - http://patorjk.com/software/taag/#p=display&f=Calvin%20S&t=IpMac
 
 Autor = """
                             ╦  ┌─┐┬ ┬┬  ┬┌─┐┌┬┐╦╦ ╦
                             ║  ├─┤││││  │├┤  │ ║╠═╣
                             ╩═╝┴ ┴└┴┘┴─┘┴└─┘ ┴╚╝╩ ╩
 """
+# Fuente: Calvin S - http://patorjk.com/software/taag/#p=display&f=Calvin%20S&t=LawlietJH
 
 Version = "v1.1.5"
 
@@ -101,6 +108,11 @@ def getMAC(Adaptador):	# Devuelve La Direción MAC De Los Adaptadores De Red.
 	if "AF_LINK" in str(Adaptador[0][0]):
 	
 		MAC = str(Adaptador[0][1])
+		MAC = MAC.replace("-",":")
+		
+	elif "AF_LINK" in str(Adaptador[1][0]):
+	
+		MAC = str(Adaptador[1][1])
 		MAC = MAC.replace("-",":")
 	
 	return MAC
@@ -260,12 +272,6 @@ if __name__ == "__main__":
 		
 		Main()
 		
-		#~ Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
-		#~ Adaptador = Datos.pop("Loopback Pseudo-Interface 1") # Sacamos Los Datos Del adaptador De Red Seleccionado.
-		#~ print(Adaptador)
-		#~ for xD in Adaptador:
-			#~ print(xD)
-		#~ os.system("Pause > Nul")
 		
 		
 
