@@ -2,14 +2,17 @@
 # Python 3
 # By: LawlietJH
 # IpMac
-# Versión: 1.0.7
+# Versión: 1.0.8
 
 
 
+import time
 import os
 
+
+
 Autor = "LawlietJH"
-Version = "v1.0.7"
+Version = "v1.0.8"
 
 
 
@@ -79,6 +82,7 @@ def getAdaptadores():	# Se Obtiene Una Lista Con Todos Los Nombres de Adaptadore
 
 def ImprimeLista(Adaptadores):
 	
+	global cont
 	cont = 1
 	
 	print("\n\n\n")
@@ -89,9 +93,15 @@ def ImprimeLista(Adaptadores):
 	
 	print("\n    [*]  0 - Salir...")
 	
-	try:			xD = input("\n\n\t [+] Elige Una Opción: ")
-	except:			print("\n\n\t [!] Opción No Válida.")
-		
+	try:
+		xD = input("\n\n\t [+] Elige Una Opción: ")
+	except KeyboardInterrupt:
+		print("\n\n\t [!] Saliendo...")
+		time.sleep(1.5)
+		exit(1)
+	except:
+		print("\n\n\t [!] Opción No Válida.")
+	
 	if xD == "0":	exit(1)
 	elif xD == "":	return xD
 	else:
@@ -109,6 +119,8 @@ def ImprimeLista(Adaptadores):
 
 def Main():	# Función Principal.
 	
+	global cont
+	
 	Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
 	Adaptadores = getAdaptadores()	# Obtenemos Todos Los Nombres De Los Adaptadores Disponibles.
 	
@@ -117,8 +129,13 @@ def Main():	# Función Principal.
 	if xD == "":
 		print("\n\n\t [!] Elige Una Opción!"), os.system("Pause > Nul")
 		return
+		
+	elif xD > cont:
+		print("\n\n\t [!] Opción No Inexistente!"), os.system("Pause > Nul")
+		return
+		
 	elif xD == False:
-		print("\n\n\t [!] Caracter No Válido!"), os.system("Pause > Nul")
+		print("\n\n\t [!] Caracteres No Válido!"), os.system("Pause > Nul")
 		return
 		
 	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos Los Datos Del adaptador De Red Seleccionado.
@@ -130,6 +147,14 @@ def Main():	# Función Principal.
 	print("\n IPv4:\t" + IPv4 + "\n\n\n")
 	
 	os.system("Pause > Nul")
+
+
+
+#=======================================================================
+
+
+
+cont = 0
 
 
 
