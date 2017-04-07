@@ -8,13 +8,19 @@
 #                    ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
 #                    ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 #                                                         By: LawlietJH
-#                                                               v1.1.5
+#                                                               v1.1.6
 
 import time
 import os
 
 
+
+Version = "v1.1.6"
+
+
+
 # Banners: http://patorjk.com/software/taag/
+
 
 
 Banner1 = """
@@ -42,7 +48,9 @@ Autor = """
 """
 # Fuente: Calvin S - http://patorjk.com/software/taag/#p=display&f=Calvin%20S&t=LawlietJH
 
-Version = "v1.1.5"
+
+
+#=======================================================================
 
 
 
@@ -64,7 +72,7 @@ def Dat():	# Función Que Permite Mostrar Los Datos Del Script.
 	print("\n\n", Autor)
 	print("\n{:^80}".format(Version))
 	
-	os.system("Pause > Nul")
+	time.sleep(2)
 	
 
 def Salir(Num=0):	# Fucnión Que Permite Salir Del Script Sin Error Alguno.
@@ -92,9 +100,20 @@ def Chk_Dep():	# Se Instalan las Dependencias.
 
 
 
-Chk_Dep()			# Se instala el módulo psutil si esta no esta instalada.
-import psutil 		# Se importa la módulo.
-
+Chk_Dep()			# Se instala el módulo psutil si este no esta instalado.
+try:
+	import psutil 		# Se Importa El Módulo.
+except:					# Si Hay Algún Error Significa Que No Se Instaló Correctamente.
+	print("\n\n   No se pudo instalar correctamente el Módulo 'psutil'.")
+	print("\n   Revise Su Conexión o Instale El Módulo Manualmente Desde Consola Con:")
+	print("\n\t 'pip install psutil'   o   ' pip3 install psutil'")
+	
+	try:
+		os.system("Pause > Nul")
+	except KeyboardInterrupt: pass
+	
+	Dat()
+	Salir(0)
 
 
 #=======================================================================
@@ -197,6 +216,10 @@ def ImprimeLista(Adaptadores):	#Imprime Los Nombres De Los Adaptadores De red Di
 		xD = input("\n\n\t [+] Elige Una Opción: ")
 	except KeyboardInterrupt:
 		print("\n\n\t\t [!] Saliendo...")
+		try:
+			time.sleep(1)
+		except KeyboardInterrupt: pass
+		Dat()
 		Salir(1)
 	except:
 		print("\n\n\t\t [!] Opción No Válida.")
@@ -231,7 +254,7 @@ def Main():	# Función Principal.
 		print("\n\n\t\t [!] Elige Una Opción!"), time.sleep(1.5)
 		return
 	elif xD >= cont:
-		print("\n\n\t\t [!] Opción No Inexistente!"), time.sleep(1.5)
+		print("\n\n\t\t [!] Opción Inexistente!"), time.sleep(1.5)
 		return
 	elif xD == False:
 		print("\n\n\t\t [!] Caracteres No Válido!"), time.sleep(1.5)
@@ -271,7 +294,5 @@ if __name__ == "__main__":
 			"By: LawlietJH                "+Version+"    ")
 		
 		Main()
-		
-		
 		
 
