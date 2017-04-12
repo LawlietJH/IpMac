@@ -1,5 +1,5 @@
 # IpMac
-## Obten La Dirección IP y Dirección MAC.
+## Obten La Dirección IP y Dirección MAC de tus interfaces de red disponibles.
 
                 ██╗██████╗ ███╗   ███╗ █████╗  ██████╗
                 ██║██╔══██╗████╗ ████║██╔══██╗██╔════╝
