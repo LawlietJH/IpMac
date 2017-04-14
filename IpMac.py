@@ -237,22 +237,8 @@ def ImprimeLista(Adaptadores):	#Imprime Los Nombres De Los Adaptadores De red Di
 
 
 
-#=======================================================================
-
-
-
-def Main():	# Función Principal.
+def ChkDatos():
 	
-	global VIPv4
-	global VIPv6
-	global cont
-	
-	
-	dt = datetime.datetime.now()
-	FH = dt.strftime("\n\n\n\t  +  %A %d de %B del %Y - %H:%M").title()
-	print(FH)
-	
-	Log = open("Logs.ZioN","a")
 	Eny = open("Logs.ZioN","r+")
 	
 	Comando = "echo %UserName%"
@@ -269,6 +255,27 @@ def Main():	# Función Principal.
 				  "\n\n\n |||||||||||||||| [+] Logs del Usuario: " + Usuario +\
 				  "\n _________________________________________________________________")			  
 	Eny.close()
+
+
+
+#=======================================================================
+
+
+
+def Main():	# Función Principal.
+	
+	global VIPv4
+	global VIPv6
+	global cont
+	
+	
+	dt = datetime.datetime.now()
+	FH = dt.strftime("\n\n\n\t  +  %A %d de %B del %Y - %H:%M").title()
+	print(FH)
+	
+	Log = open("Logs.ZioN","a")
+	
+	ChkDatos()
 	
 	Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
 	Adaptadores = getAdaptadores()	# Obtenemos Todos Los Nombres De Los Adaptadores Disponibles.
