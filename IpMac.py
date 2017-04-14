@@ -8,7 +8,7 @@
 #                    ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
 #                    ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 #                                                         By: LawlietJH
-#                                                               v1.1.7
+#                                                               v1.1.8
 
 import datetime
 import locale
@@ -17,7 +17,7 @@ import os
 
 
 
-Version = "v1.1.7"
+Version = "v1.1.8"
 
 
 
@@ -251,6 +251,24 @@ def Main():	# Función Principal.
 	dt = datetime.datetime.now()
 	FH = dt.strftime("\n\n\n\t  +  %A %d de %B del %Y - %H:%M").title()
 	print(FH)
+	
+	Log = open("Logs.ZioN","a")
+	Eny = open("Logs.ZioN","r+")
+	
+	Comando = "echo %UserName%"
+	Usuario = os.popen(Comando)
+	Usuario = Usuario.read()
+	
+	Lineas = Eny.readlines()
+
+	if Lineas == []: Eny.write("\n\t     [+] Por: LawlietJH - IpMac "+Version)
+	if not " |||||||||||||||| [+] Logs del Usuario: " + Usuario in Lineas:
+		
+		Eny.write("\n\n ================================================================="+\
+				  "\n _________________________________________________________________"+\
+				  "\n\n\n |||||||||||||||| [+] Logs del Usuario: " + Usuario +\
+				  "\n _________________________________________________________________")			  
+	Eny.close()
 	
 	Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
 	Adaptadores = getAdaptadores()	# Obtenemos Todos Los Nombres De Los Adaptadores Disponibles.
