@@ -8,14 +8,16 @@
 #                    ██║██║     ██║ ╚═╝ ██║██║  ██║╚██████╗
 #                    ╚═╝╚═╝     ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
 #                                                         By: LawlietJH
-#                                                               v1.1.6
+#                                                               v1.1.7
 
+import datetime
+import locale
 import time
 import os
 
 
 
-Version = "v1.1.6"
+Version = "v1.1.7"
 
 
 
@@ -245,6 +247,11 @@ def Main():	# Función Principal.
 	global VIPv6
 	global cont
 	
+	
+	dt = datetime.datetime.now()
+	FH = dt.strftime("\n\n\n\t  +  %A %d de %B del %Y - %H:%M").title()
+	print(FH)
+	
 	Datos = getDatos()				# Obtenemos La Información de Todos Los Adaptadores de Red.
 	Adaptadores = getAdaptadores()	# Obtenemos Todos Los Nombres De Los Adaptadores Disponibles.
 	
@@ -259,25 +266,41 @@ def Main():	# Función Principal.
 	elif xD == False:
 		print("\n\n\t\t [!] Caracteres No Válido!"), time.sleep(1.5)
 		return
-		
+	
+	
+	FH = dt.strftime("\t%A %d de %B del %Y - %H:%M").title()
+	Log.write("\n\n ================================================================="+\
+	          "\n\n [+] Fecha Y Hora: " + FH + "\n\n [+] Interfaz '" + Adaptadores[xD-1] + "':\n")
+	
+	
 	Adaptador = Datos.pop(Adaptadores[xD-1]) # Sacamos Los Datos Del adaptador De Red Seleccionado.
 	
 	MAC = getMAC(Adaptador)			# Obtenemos La MAC Del Adaptador Seleccionado.
 	IPv4, IPv6 = getIP(Adaptador)	# Obtenemos La IP Del Adaptador Seleccionado.
 	
 	print("\n\n\n\t\t [*] MAC:\t" + MAC)		# Imprime La Dirección MAC.
-		
+	Log.write("\n\t [*] MAC:\t" + MAC)
+	
 	if len(Adaptador) == 4:						# Si Hay Más de Una IPv4.
 		print("\n\t\t [*] IPv4 (1):\t" + Adaptador[1][1])
 		print("\n\t\t [*] IPv4 (2):\t" + Adaptador[2][1])
 		print("\n\t\t [*] IPv6:\t" + Adaptador[3][1])
-	
-	elif VIPv4 == True: print("\n\t\t [*] IPv4:\t" + IPv4)	# Imprime Si Hay IPv4.
 		
-	if VIPv6 == True: print("\n\t\t [*] IPv6:\t" + IPv6)	# Imprime Si Hay IPv6.
-	
+		Log.write("\n\t [*] IPv4 (1):\t" + Adaptador[1][1] +\
+				  "\n\t [*] IPv4 (2):\t" + Adaptador[2][1] +\
+				  "\n\t [*] IPv6:\t" + Adaptador[3][1])
+		
+	elif VIPv4 == True:
+		print("\n\t\t [*] IPv4:\t" + IPv4)	# Imprime Si Hay IPv4.
+		Log.write("\n\t [*] IPv4:\t" + IPv4)
+		
+	if VIPv6 == True:
+		print("\n\t\t [*] IPv6:\t" + IPv6)	# Imprime Si Hay IPv6.
+		Log.write("\n\t [*] IPv6:\t" + IPv6)
+		
 	print("\n\n\n")
 	
+	Log.close()
 	os.system("Pause > Nul")
 
 
@@ -287,6 +310,8 @@ def Main():	# Función Principal.
 
 
 if __name__ == "__main__":
+	
+	locale.setlocale(locale.LC_ALL, "es-MX")
 	
 	while True: 
 		
